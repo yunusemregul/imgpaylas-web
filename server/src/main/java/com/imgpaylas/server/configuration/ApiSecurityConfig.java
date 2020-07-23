@@ -12,6 +12,14 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
-		http.authorizeRequests().anyRequest().authenticated();
+		http
+				.csrf().disable()
+				.authorizeRequests()
+				.anyRequest()
+				.permitAll();
+				/*.antMatchers("api")
+				.authenticated()
+				.and()
+				.formLogin();*/
 	}
 }
