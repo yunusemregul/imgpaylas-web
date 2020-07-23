@@ -1,25 +1,30 @@
 package com.imgpaylas.server.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User
 {
 	@Id
-	@GeneratedValue
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
+	@NotNull
+	private String passwordHash;
+
+	@NotNull
 	private String name;
 
 	@Column(unique = true)
 	private String email;
 
-	public long getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	public void setId(Integer id)
+	public void setId(Long id)
 	{
 		this.id = id;
 	}
@@ -42,5 +47,15 @@ public class User
 	public void setEmail(String email)
 	{
 		this.email = email;
+	}
+
+	public String getPasswordHash()
+	{
+		return passwordHash;
+	}
+
+	public void setPasswordHash(String passwordHash)
+	{
+		this.passwordHash = passwordHash;
 	}
 }
