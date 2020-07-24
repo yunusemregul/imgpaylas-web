@@ -11,7 +11,8 @@ public class User
 	private Long id;
 
 	@NotNull
-	private String password_hash;
+	@Column(name = "password_hash")
+	private String passwordHash;
 
 	@NotNull
 	private String name;
@@ -27,6 +28,16 @@ public class User
 	public void setId(Long id)
 	{
 		this.id = id;
+	}
+
+	public String getPasswordHash()
+	{
+		return passwordHash;
+	}
+
+	public void setPasswordHash(String passwordHash)
+	{
+		this.passwordHash = passwordHash;
 	}
 
 	public String getName()
@@ -47,15 +58,5 @@ public class User
 	public void setEmail(String email)
 	{
 		this.email = email;
-	}
-
-	public String getPasswordHash()
-	{
-		return password_hash;
-	}
-
-	public void setPasswordHash(String passwordHash)
-	{
-		this.password_hash = passwordHash;
 	}
 }

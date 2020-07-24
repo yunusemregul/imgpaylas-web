@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,8 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @SpringBootTest(
-		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-		classes = UserDetailsTestServiceConfig.class
+		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
@@ -37,12 +37,17 @@ public class ImageAPITests
 	}
 
 	@Test
-	@WithUserDetails(value = "test@imgpaylas.com")
+	//@WithUserDetails(value = "test@imgpaylas.com")
+	@WithMockUser(username = "testemail@go.com")
 	public void uploadImage() throws Exception
 	{
 		MockMultipartFile mockImage = new MockMultipartFile("image", "test.png", "image/png", "data".getBytes());
 
-		mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/images/upload").file(mockImage))
+		mockMvc.perform(MockMvcRequestBuilders
+				.multipart("/api/v1/images/upload")
+				.file(mockImage)
+				.param("description", "Test description!")
+		)
 				.andExpect(status().isOk());
 	}
 }

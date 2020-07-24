@@ -20,12 +20,12 @@ public class UserController
 	public @ResponseBody
 	String addNewUser(@RequestParam String name, @RequestParam String email, @RequestParam String password)
 	{
-		User n = new User();
-		n.setName(name);
-		n.setEmail(email);
-		n.setPasswordHash(bCryptPasswordEncoder.encode(password));
+		User newUser = new User();
+		newUser.setName(name);
+		newUser.setEmail(email);
+		newUser.setPasswordHash(bCryptPasswordEncoder.encode(password));
 
-		userRepository.save(n);
+		userRepository.save(newUser);
 		return "Saved";
 	}
 
