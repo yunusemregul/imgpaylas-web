@@ -3,7 +3,7 @@ package com.imgpaylas.server.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 public class User
 {
 	@Id
@@ -11,7 +11,7 @@ public class User
 	private Long id;
 
 	@NotNull
-	private String passwordHash;
+	private String password_hash;
 
 	@NotNull
 	private String name;
@@ -51,11 +51,11 @@ public class User
 
 	public String getPasswordHash()
 	{
-		return passwordHash;
+		return password_hash;
 	}
 
 	public void setPasswordHash(String passwordHash)
 	{
-		this.passwordHash = passwordHash;
+		this.password_hash = passwordHash;
 	}
 }
