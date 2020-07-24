@@ -1,7 +1,7 @@
 package com.imgpaylas.server.controller;
 
 import com.imgpaylas.server.model.User;
-import com.imgpaylas.server.repository.UserRepository;
+import com.imgpaylas.server.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController
 {
 	@Autowired
-	private UserRepository userRepository;
+	private IUserRepository userRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;

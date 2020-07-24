@@ -1,9 +1,9 @@
 package com.imgpaylas.server.controller;
 
 import com.imgpaylas.server.model.Image;
-import com.imgpaylas.server.repository.ImageRepository;
-import com.imgpaylas.server.repository.UserRepository;
-import com.imgpaylas.server.service.StorageService;
+import com.imgpaylas.server.repository.IImageRepository;
+import com.imgpaylas.server.repository.IUserRepository;
+import com.imgpaylas.server.service.IImageStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,13 +19,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageUploadController
 {
 	@Autowired
-	private ImageRepository imageRepository;
+	private IImageRepository imageRepository;
 
 	@Autowired
-	private UserRepository userRepository;
+	private IUserRepository userRepository;
 
 	@Autowired
-	private StorageService storageService;
+	private IImageStorageService storageService;
 
 	@PostMapping(path = "/upload")
 	public @ResponseBody
@@ -33,10 +33,6 @@ public class ImageUploadController
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
-		storageService.store(file);
-
-		System.out.println(email);
-		System.out.println(userRepository.findByEmail(email));
 
 		Image newImage = new Image();
 		newImage.setUser(userRepository.findByEmail(
@@ -44,7 +40,8 @@ public class ImageUploadController
 		));
 		newImage.setDescription(description);
 
-		imageRepository.save(newImage);
+		newImage = imageRepository.save(newImage);
+		storageService.store(newImage, file);
 
 		return "Success! " + email;
 	}

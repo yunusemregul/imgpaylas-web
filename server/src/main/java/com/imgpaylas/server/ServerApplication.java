@@ -1,6 +1,6 @@
 package com.imgpaylas.server;
 
-import com.imgpaylas.server.service.StorageService;
+import com.imgpaylas.server.service.IImageStorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +18,7 @@ public class ServerApplication
 	}
 
 	@Bean
-	CommandLineRunner init(StorageService storageService)
+	CommandLineRunner init(IImageStorageService storageService)
 	{
 		return (args) ->
 		{

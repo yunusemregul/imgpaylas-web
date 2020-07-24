@@ -1,7 +1,7 @@
 package com.imgpaylas.server.service;
 
 import com.imgpaylas.server.model.User;
-import com.imgpaylas.server.repository.UserRepository;
+import com.imgpaylas.server.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 public class SqlUserDetailsService implements UserDetailsService
 {
 	@Autowired
-	private UserRepository userRepository;
+	private IUserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException

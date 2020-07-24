@@ -1,5 +1,6 @@
 package com.imgpaylas.server.service;
 
+import com.imgpaylas.server.model.Image;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,9 +13,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
-public class ImageStorageService implements StorageService
+public class ImageStorageService implements IImageStorageService
 {
-	private final Path root = Paths.get("images");
+	private final Path root = Paths.get("images/users/");
 
 	@Override
 	public void init()
@@ -30,12 +31,15 @@ public class ImageStorageService implements StorageService
 	}
 
 	@Override
-	public void store(MultipartFile file)
+	public void store(Image image, MultipartFile file)
 	{
-		String filename = StringUtils.cleanPath(file.getOriginalFilename());
+		String fileName = file.getOriginalFilename();
+		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+		Path toSave = this.root.resolve(String.format("%d/%d.%s", image.getUser().getId(), image.getId(), extension));
 		try (InputStream inputStream = file.getInputStream())
 		{
-			Files.copy(inputStream, this.root.resolve(filename),
+			Files.createDirectories(toSave);
+			Files.copy(inputStream, toSave,
 					StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e)
 		{
