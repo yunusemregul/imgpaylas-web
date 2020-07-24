@@ -1,5 +1,7 @@
 package com.imgpaylas.server.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +18,9 @@ public class Image
 	private User user;
 
 	private String description;
+
+	@NotNull
+	private String extension;
 
 	public Long getId()
 	{
@@ -45,5 +50,15 @@ public class Image
 	public void setDescription(String description)
 	{
 		this.description = description;
+	}
+
+	public String getExtension()
+	{
+		return extension;
+	}
+
+	public void setExtension(String extension)
+	{
+		this.extension = extension;
 	}
 }

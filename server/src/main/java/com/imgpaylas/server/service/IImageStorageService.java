@@ -1,6 +1,7 @@
 package com.imgpaylas.server.service;
 
 import com.imgpaylas.server.model.Image;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
@@ -12,7 +13,15 @@ public interface IImageStorageService
 
 	void store(Image image, MultipartFile file);
 
-	Path load(String filename);
+	Path load(Long imageId);
 
-	void delete(String filename);
+	Resource loadAsResource(Long imageId);
+
+	void delete(Long imageId);
+
+	String getImagePath(Long imageId);
+
+	String getImagePath(Long userId, Long imageId, String extension);
+
+	String getImageExtension(MultipartFile file);
 }

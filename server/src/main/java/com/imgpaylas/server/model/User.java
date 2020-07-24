@@ -1,5 +1,7 @@
 package com.imgpaylas.server.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -8,6 +10,7 @@ public class User
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonValue // TODO: returns null
 	private Long id;
 
 	@NotNull

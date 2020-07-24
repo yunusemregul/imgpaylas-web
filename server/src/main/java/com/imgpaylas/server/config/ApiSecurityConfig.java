@@ -19,7 +19,10 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 				.authorizeRequests()
 				.anyRequest()
 				.permitAll();*/
+				.csrf().disable()
 				.authorizeRequests()
+				.antMatchers("/api/**/user/register")
+				.permitAll()
 				.anyRequest()
 				.authenticated()
 				.and()

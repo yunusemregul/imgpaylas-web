@@ -18,9 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-@SpringBootTest(
-		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 public class ImageAPITests
@@ -37,16 +35,27 @@ public class ImageAPITests
 	}
 
 	@Test
-	//@WithUserDetails(value = "test@imgpaylas.com")
 	@WithMockUser(username = "testemail@go.com")
 	public void uploadImage() throws Exception
 	{
 		MockMultipartFile mockImage = new MockMultipartFile("image", "test.png", "image/png", "data".getBytes());
 
-		mockMvc.perform(MockMvcRequestBuilders
-				.multipart("/api/v1/images/upload")
-				.file(mockImage)
-				.param("description", "Test description!")
+		mockMvc.perform(
+				MockMvcRequestBuilders
+						.multipart("/api/v1/image/upload")
+						.file(mockImage)
+						.param("description", "Test description!")
+		)
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	@WithMockUser(username = "testemail@go.com")
+	public void getAllImages() throws Exception
+	{
+		mockMvc.perform(
+				MockMvcRequestBuilders
+						.get("/api/v1/image/all")
 		)
 				.andExpect(status().isOk());
 	}

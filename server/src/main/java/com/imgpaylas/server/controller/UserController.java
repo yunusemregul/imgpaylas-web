@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("api/v1/user")
 public class UserController
 {
 	@Autowired
@@ -16,9 +16,9 @@ public class UserController
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@PostMapping(path = "/add")
+	@PostMapping(path = "/register")
 	public @ResponseBody
-	String addNewUser(@RequestParam String name, @RequestParam String email, @RequestParam String password)
+	String register(@RequestParam String name, @RequestParam String email, @RequestParam String password)
 	{
 		User newUser = new User();
 		newUser.setName(name);
