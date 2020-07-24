@@ -15,7 +15,7 @@ public class Image
 	private User user;
 
 	@Column(unique = true)
-	private String imageUrl;
+	private String image_url;
 
 	private String description;
 }
