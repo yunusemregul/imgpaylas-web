@@ -1,4 +1,4 @@
-package com.imgpaylas.server.controller;
+package com.imgpaylas.server.controller.api;
 
 import com.imgpaylas.server.model.User;
 import com.imgpaylas.server.repository.IUserRepository;

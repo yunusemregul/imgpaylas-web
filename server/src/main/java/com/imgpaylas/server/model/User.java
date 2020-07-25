@@ -10,7 +10,6 @@ public class User
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonValue // TODO: returns null
 	private Long id;
 
 	@NotNull
@@ -23,6 +22,7 @@ public class User
 	@Column(unique = true)
 	private String email;
 
+	@JsonValue
 	public Long getId()
 	{
 		return id;

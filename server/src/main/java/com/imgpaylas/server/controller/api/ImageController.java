@@ -1,14 +1,10 @@
-package com.imgpaylas.server.controller;
+package com.imgpaylas.server.controller.api;
 
 import com.imgpaylas.server.model.Image;
-import com.imgpaylas.server.model.User;
 import com.imgpaylas.server.repository.IImageRepository;
 import com.imgpaylas.server.repository.IUserRepository;
 import com.imgpaylas.server.service.IImageStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
