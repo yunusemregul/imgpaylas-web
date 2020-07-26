@@ -1,10 +1,12 @@
 package com.imgpaylas.server.controller;
 
 import com.imgpaylas.server.model.Image;
+import com.imgpaylas.server.repository.IImageRepository;
 import com.imgpaylas.server.service.IImageStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +21,15 @@ public class ImageServeController
 	@Autowired
 	private IImageStorageService storageService;
 
+	@Autowired
+	private IImageRepository imageRepository;
+
 	@GetMapping(value = "/{user_id}/{image_id}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveImage(@PathVariable Long user_id, @PathVariable Long image_id)
 	{
 
 		Resource file = storageService.loadAsResource(image_id);
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+		return ResponseEntity.ok().contentType(imageRepository.findById(image_id).getExtension().equals("png") ? MediaType.IMAGE_PNG : MediaType.IMAGE_JPEG).body(file);
 	}
 }

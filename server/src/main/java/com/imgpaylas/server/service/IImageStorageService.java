@@ -19,9 +19,5 @@ public interface IImageStorageService
 
 	void delete(Long imageId);
 
-	String getImagePath(Long imageId);
-
-	String getImagePath(Long userId, Long imageId, String extension);
-
 	String getImageExtension(MultipartFile file);
 }

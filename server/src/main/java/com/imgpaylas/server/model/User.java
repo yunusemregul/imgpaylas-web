@@ -1,5 +1,6 @@
 package com.imgpaylas.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.*;
@@ -22,7 +23,6 @@ public class User
 	@Column(unique = true)
 	private String email;
 
-	@JsonValue
 	public Long getId()
 	{
 		return id;
@@ -33,6 +33,7 @@ public class User
 		this.id = id;
 	}
 
+	@JsonIgnore
 	public String getPasswordHash()
 	{
 		return passwordHash;

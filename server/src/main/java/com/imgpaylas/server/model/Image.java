@@ -1,6 +1,8 @@
 package com.imgpaylas.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,6 +16,7 @@ public class Image
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	@NotNull
 	private User user;
 
@@ -21,6 +24,26 @@ public class Image
 
 	@NotNull
 	private String extension;
+
+	@JsonIgnore
+	public String getImagePath()
+	{
+		return String.format("%d/%d.%s", user.getId(), id, extension);
+	}
+
+	@JsonProperty("url")
+	@JsonInclude
+	public String getURL()
+	{
+		return String.format("images/%d/%d.%s", user.getId(), id, extension);
+	}
+
+	@JsonProperty("user_id")
+	@JsonInclude
+	public Long getUserId()
+	{
+		return user.getId();
+	}
 
 	public Long getId()
 	{
@@ -52,6 +75,7 @@ public class Image
 		this.description = description;
 	}
 
+	@JsonIgnore
 	public String getExtension()
 	{
 		return extension;

@@ -41,7 +41,7 @@ public class ImageStorageService implements IImageStorageService
 	@Override
 	public void store(Image image, MultipartFile file)
 	{
-		Path toSave = this.root.resolve(getImagePath(image.getUser().getId(), image.getId(), getImageExtension(file)));
+		Path toSave = this.root.resolve(image.getImagePath());
 		try (InputStream inputStream = file.getInputStream())
 		{
 			Files.createDirectories(toSave);
@@ -55,7 +55,7 @@ public class ImageStorageService implements IImageStorageService
 	@Override
 	public Path load(Long imageId)
 	{
-		return root.resolve(getImagePath(imageId));
+		return root.resolve(imageRepository.findById(imageId).getImagePath());
 	}
 
 	@Override
@@ -86,20 +86,6 @@ public class ImageStorageService implements IImageStorageService
 	public void delete(Long imageId)
 	{
 
-	}
-
-	@Override
-	public String getImagePath(Long imageId)
-	{
-		Image image = imageRepository.findById(imageId);
-
-		return getImagePath(image.getUser().getId(), imageId, image.getExtension());
-	}
-
-	@Override
-	public String getImagePath(Long userId, Long imageId, String extension)
-	{
-		return String.format("%d/%d.%s", userId, imageId, extension);
 	}
 
 	@Override
