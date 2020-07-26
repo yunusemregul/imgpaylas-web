@@ -49,7 +49,7 @@ public class ImageController
 
 	@PostMapping(path = "/upload")
 	@ResponseBody
-	public String uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("description") String description)
+	public Image uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("description") String description)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
@@ -62,6 +62,15 @@ public class ImageController
 		newImage = imageRepository.save(newImage);
 		storageService.store(newImage, file);
 
-		return "Success! " + email;
+		return newImage;
+	}
+
+	@PostMapping(path = "/delete")
+	@ResponseBody
+	public void deleteImage(@RequestParam Long image_id)
+	{
+		Image image = imageRepository.findById(image_id);
+		storageService.delete(image_id);
+		imageRepository.delete(image);
 	}
 }

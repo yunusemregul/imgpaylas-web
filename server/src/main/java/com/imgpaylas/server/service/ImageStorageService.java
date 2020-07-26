@@ -85,7 +85,15 @@ public class ImageStorageService implements IImageStorageService
 	@Override
 	public void delete(Long imageId)
 	{
+		Path image = root.resolve(imageRepository.findById(imageId).getImagePath());
 
+		try
+		{
+			Files.delete(image);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override

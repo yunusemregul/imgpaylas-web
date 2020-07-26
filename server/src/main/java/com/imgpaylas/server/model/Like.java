@@ -1,5 +1,9 @@
 package com.imgpaylas.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -18,6 +22,21 @@ public class Like
 	@Id
 	private Image image;
 
+	@JsonProperty("uid")
+	@JsonInclude
+	public Long getUserId()
+	{
+		return user.getId();
+	}
+
+	@JsonProperty("iid")
+	@JsonInclude
+	public Long getImageId()
+	{
+		return image.getId();
+	}
+
+	@JsonIgnore
 	public User getUser()
 	{
 		return user;
@@ -28,6 +47,7 @@ public class Like
 		this.user = user;
 	}
 
+	@JsonIgnore
 	public Image getImage()
 	{
 		return image;

@@ -3,8 +3,12 @@ package com.imgpaylas.server.controller.api;
 import com.imgpaylas.server.model.User;
 import com.imgpaylas.server.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLException;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -18,15 +22,20 @@ public class UserController
 
 	@PostMapping(path = "/register")
 	public @ResponseBody
-	String register(@RequestParam String name, @RequestParam String email, @RequestParam String password)
+	Object register(@RequestParam String name, @RequestParam String email, @RequestParam String password)
 	{
 		User newUser = new User();
 		newUser.setName(name);
 		newUser.setEmail(email);
 		newUser.setPasswordHash(bCryptPasswordEncoder.encode(password));
 
-		userRepository.save(newUser);
-		return "Saved";
+		try
+		{
+			return userRepository.save(newUser);
+		} catch (DataIntegrityViolationException e)
+		{
+			return ResponseEntity.badRequest().body(e.getMostSpecificCause().getMessage());
+		}
 	}
 
 	@GetMapping(path = "/all")
