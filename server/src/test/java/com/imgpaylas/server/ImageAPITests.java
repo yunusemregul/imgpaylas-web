@@ -95,7 +95,7 @@ public class ImageAPITests
 		mockMvc.perform(
 				MockMvcRequestBuilders
 						.post("/api/v1/like/add")
-						.param("image_id", ""+uploadedImageId)
+						.param("image_id", "" + uploadedImageId)
 		)
 				.andExpect(status().isOk());
 	}
@@ -107,7 +107,7 @@ public class ImageAPITests
 		mockMvc.perform(
 				MockMvcRequestBuilders
 						.post("/api/v1/like/remove")
-						.param("image_id", ""+uploadedImageId)
+						.param("image_id", "" + uploadedImageId)
 		)
 				.andExpect(status().isOk());
 	}
