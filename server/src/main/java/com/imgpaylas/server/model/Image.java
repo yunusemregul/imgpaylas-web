@@ -3,11 +3,13 @@ package com.imgpaylas.server.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "images")
 public class Image
 {
 	@Id
@@ -20,6 +22,7 @@ public class Image
 	@NotNull
 	private User user;
 
+	@JsonProperty("desc")
 	private String description;
 
 	@NotNull
@@ -35,10 +38,11 @@ public class Image
 	@JsonInclude
 	public String getURL()
 	{
-		return String.format("images/%d/%d.%s", user.getId(), id, extension);
+		String hostUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+		return String.format("%s/images/%d/%d", hostUrl, user.getId(), id);
 	}
 
-	@JsonProperty("user_id")
+	@JsonProperty("user")
 	@JsonInclude
 	public Long getUserId()
 	{

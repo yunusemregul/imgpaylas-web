@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("api/v1/image")
 public class ImageController
@@ -24,16 +26,18 @@ public class ImageController
 	@Autowired
 	private IImageStorageService storageService;
 
-	@GetMapping(value = "/{user_id}/{image_id}")
+	@GetMapping(value = "user/{user_id}/{image_id}")
 	@ResponseBody
-	public Image serveImage(@PathVariable Long user_id, @PathVariable Long image_id)
+	public Image imageInfo(@PathVariable Long user_id, @PathVariable Long image_id)
 	{
-		/*
-		Resource file = storageService.loadAsResource(image_id);
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-		*/
-
 		return imageRepository.findById(image_id);
+	}
+
+	@GetMapping(value = "user/{user_id}/all")
+	@ResponseBody
+	public List<Image> userAllImages(@PathVariable Long user_id)
+	{
+		return imageRepository.findAllByUser(userRepository.findById(user_id));
 	}
 
 	@GetMapping(path = "/all")

@@ -35,7 +35,7 @@ public class ImageAPITests
 	}
 
 	@Test
-	@WithMockUser(username = "testemail@go.com")
+	@WithMockUser(username = "test@imgpaylas.com")
 	public void uploadImage() throws Exception
 	{
 		MockMultipartFile mockImage = new MockMultipartFile("image", "test.png", "image/png", "data".getBytes());
