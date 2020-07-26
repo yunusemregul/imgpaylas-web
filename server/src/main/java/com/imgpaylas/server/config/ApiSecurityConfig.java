@@ -2,6 +2,7 @@ package com.imgpaylas.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,10 +24,16 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 				.authorizeRequests()
 				.antMatchers("/api/**/user/register")
 				.permitAll()
-				.anyRequest()
-				.authenticated()
+				.antMatchers(
+						HttpMethod.GET,
+						"/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
+				.permitAll()
+				.anyRequest().authenticated()
 				.and()
-				.formLogin();
+				.formLogin().loginPage("/index.html")
+				.loginProcessingUrl("/perform_login")
+				.defaultSuccessUrl("/homepage.html", true)
+				.failureUrl("/index.html?error=true");
 	}
 
 	@Bean
