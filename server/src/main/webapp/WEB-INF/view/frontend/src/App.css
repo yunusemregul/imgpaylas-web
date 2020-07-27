@@ -1,3 +1,24 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.row-fixed {
+  flex: 0 1 auto;
+}
+
+.row-fill {
+  flex: 1 1 auto;
+}
+
 .header {
   background-color: #313131;
   height: 100;

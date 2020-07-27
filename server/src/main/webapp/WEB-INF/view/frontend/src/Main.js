@@ -2,14 +2,13 @@ import React from "react";
 import { withRouter } from "react-router";
 import content from "./assets/content.png";
 import Header from "./Header";
+import DivBackground from "./DivBackground";
 
 function Main() {
   return (
-    <div>
+    <div className="box">
       <Header />
-      <div style={{ overflow: "hidden" }}>
-        <img src={content} alt="content-background" />
-      </div>
+      <DivBackground></DivBackground>
     </div>
   );
 }

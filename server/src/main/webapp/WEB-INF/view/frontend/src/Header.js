@@ -6,8 +6,11 @@ import logo from "./assets/logo.png";
 function Header(props) {
   return (
     <div
-      className="header"
-      style={{ display: "flex", flexDirection: "row", position: "relative" }}
+      className="header row-fixed"
+      style={{
+        position: "relative",
+        height: "102px",
+      }}
     >
       <img
         src={logo}
