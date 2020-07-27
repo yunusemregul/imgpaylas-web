@@ -1,11 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Login from './Login';
+import React from "react";
+import "./App.css";
+import Header from "./Header";
+import content from "./assets/content.png";
 
 function App() {
   return (
-    <Login/>
+    <div>
+      <Header />
+      <div style={{ overflow: "hidden" }}>
+        <img src={content} alt="content-background" />
+      </div>
+    </div>
   );
 }
 

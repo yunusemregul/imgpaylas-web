@@ -1,0 +1,25 @@
+.header {
+  background-color: #313131;
+  height: 100;
+}
+
+.header-button {
+  border: 0px;
+  background-color: white;
+  color: #313131;
+  padding: 14px 28px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 2px;
+  outline: none;
+}
+
+.header-button-login {
+  background-color: transparent;
+  color: white;
+}
+
+.header-button-register {
+  background-color: #ffc72e;
+  color: #313131;
+}

@@ -1,4 +1,5 @@
 /node/*
+debug.log
 
 # dependencies
 /node_modules
