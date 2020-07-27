@@ -1,8 +1,9 @@
 import React from "react";
-import Header from "./Header";
+import { withRouter } from "react-router";
 import DivBackground from "./DivBackground";
+import Header from "./Header";
 
-export default function Login(props) {
+function Main() {
   return (
     <div className="box">
       <Header />
@@ -10,3 +11,5 @@ export default function Login(props) {
     </div>
   );
 }
+
+export default withRouter(Main);

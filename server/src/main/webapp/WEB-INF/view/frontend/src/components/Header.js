@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import "./App.css";
-import logo from "./assets/logo.png";
+import "../assets/style/style.css";
+import logo from "../assets/images/logo.png";
 
 function Header(props) {
   return (

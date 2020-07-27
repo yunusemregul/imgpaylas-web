@@ -1,5 +1,5 @@
 import React from "react";
-import content from "./assets/content.png";
+import content from "../assets/images/content.png";
 
 export default function DivBackground(props) {
   return (
