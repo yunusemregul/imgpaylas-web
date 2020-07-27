@@ -1,14 +1,22 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import "./App.css";
 import logo from "./assets/logo.png";
 
-export default function Header() {
+function Header(props) {
   return (
     <div
       className="header"
       style={{ display: "flex", flexDirection: "row", position: "relative" }}
     >
-      <img src={logo} alt="logo" style={{ margin: 20 }} />
+      <img
+        src={logo}
+        alt="logo"
+        style={{ margin: 20, cursor: "pointer" }}
+        onClick={() => {
+          props.history.push("/");
+        }}
+      />
       <div
         style={{
           display: "flex",
@@ -25,6 +33,9 @@ export default function Header() {
           style={{
             marginRight: 20,
           }}
+          onClick={() => {
+            props.history.push("/login");
+          }}
         >
           Giriş Yap
         </button>
@@ -35,3 +46,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default withRouter(Header);

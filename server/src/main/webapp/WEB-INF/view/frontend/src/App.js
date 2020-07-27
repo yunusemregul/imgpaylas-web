@@ -1,16 +1,15 @@
 import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
-import Header from "./Header";
-import content from "./assets/content.png";
+import Login from "./Login";
+import Main from "./Main";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <div style={{ overflow: "hidden" }}>
-        <img src={content} alt="content-background" />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Route exact path="/" component={Main} />
+      <Route path="/login" component={Login} />
+    </BrowserRouter>
   );
 }
 
