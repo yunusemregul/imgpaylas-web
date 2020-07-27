@@ -28,6 +28,8 @@ public class ImageServeController
 	@ResponseBody
 	public ResponseEntity<Resource> serveImage(@PathVariable Long user_id, @PathVariable Long image_id)
 	{
+		if (!imageRepository.existsById(image_id))
+			return ResponseEntity.notFound().build();
 
 		Resource file = storageService.loadAsResource(image_id);
 		return ResponseEntity.ok().contentType(imageRepository.findById(image_id).getExtension().equals("png") ? MediaType.IMAGE_PNG : MediaType.IMAGE_JPEG).body(file);

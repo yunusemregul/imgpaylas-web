@@ -8,6 +8,8 @@ export default function DivBackground(props) {
       style={{
         overflow: "hidden",
         backgroundImage: "url(" + content + ")",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
       }}
     >
       {props.children}

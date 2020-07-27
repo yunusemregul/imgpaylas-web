@@ -9,5 +9,8 @@ import java.util.List;
 public interface IImageRepository extends CrudRepository<Image, Integer>
 {
 	Image findById(Long id);
+
 	List<Image> findAllByUser(User user);
+
+	boolean existsById(Long id);
 }
