@@ -2,37 +2,46 @@ import React from "react";
 import Header from "../components/Header";
 import DivBackground from "../components/DivBackground";
 
+const marginTop = { marginTop: "20px" };
+
 export default function Register() {
   return (
     <div className="box">
-      <Header title="Kayıt Ol" />
+      <Header />
       <DivBackground>
         <div className="center-vertical-parent">
           <form className="center">
-            <input className="input" type="text" placeholder="Ad" />
+            <label className="form-label">Kayıt Ol</label>
+            <br />
+            <input
+              className="input"
+              type="text"
+              placeholder="Ad"
+              style={marginTop}
+            />
             <br />
             <input
               className="input"
               type="text"
               placeholder="E-posta"
-              style={{ marginTop: "10px" }}
+              style={marginTop}
             />
             <br />
             <input
               className="input"
               type="text"
               placeholder="Şifre"
-              style={{ marginTop: "10px" }}
+              style={marginTop}
             />
             <br />
             <input
               className="input"
               type="text"
               placeholder="Şifre Tekrarı"
-              style={{ marginTop: "10px" }}
+              style={marginTop}
             />
             <br />
-            <button className="button" style={{ marginTop: "10px" }}>
+            <button className="button" style={marginTop}>
               Kayıt Ol
             </button>
           </form>

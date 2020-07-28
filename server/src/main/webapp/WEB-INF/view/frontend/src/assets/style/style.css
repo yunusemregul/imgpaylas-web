@@ -25,7 +25,8 @@ body,
 
 .header {
   background-color: #313131;
-  height: 100;
+  position: relative;
+  height: 60px;
 }
 
 .clickable,
@@ -87,4 +88,23 @@ body,
   display: table-cell;
   vertical-align: middle;
   margin: auto;
+}
+
+.form-label {
+  color: white;
+  font-size: 40px;
+}
+
+.absolute-centerx {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 20px;
+  color: white;
+  font-size: 22px;
+}
+
+a {
+  font-size: 22px;
+  color: #ffc72e;
 }
