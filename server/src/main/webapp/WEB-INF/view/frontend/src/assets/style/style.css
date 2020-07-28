@@ -113,3 +113,9 @@ a {
   font-size: 22px;
   color: #ffc72e;
 }
+
+.label-error
+{
+  font-size: 22px;
+  color: red;
+}

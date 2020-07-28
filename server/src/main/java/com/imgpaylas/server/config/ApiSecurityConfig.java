@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 {
+	// TODO: custom login controller
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
@@ -36,7 +37,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 				.usernameParameter("email")
 				.loginProcessingUrl("/perform_login")
 				.defaultSuccessUrl("/home", true)
-				.failureUrl("/index.html?error=true");
+				.failureUrl("/login?error=true");
 	}
 
 	@Bean

@@ -1,56 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import DivBackground from "../components/DivBackground";
+import Input from "../components/Input";
+import axios from "axios";
 
 const marginTop = { marginTop: "20px" };
 
 export default function Register() {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const body = {};
+    formData.forEach((value, property) => (body[property] = value));
+    axios.post("/api/v1/user/register", formData).then((response) => {
+      if (response.status == 200) {
+        axios.post("/perform_login", formData).then(() => {
+          window.location.href = "/home";
+        });
+      }
+    });
+  }
+
   return (
     <div className="box">
       <Header />
       <DivBackground>
         <div className="center-vertical-parent">
-          <form className="center">
+          <form className="center" onSubmit={handleSubmit}>
             <label className="form-label">Kayıt Ol</label>
             <br />
-            <input
-              className="input"
+            <Input type="text" placeholder="Ad" id="name" style={marginTop} />
+            <br />
+            <Input
               type="text"
-              placeholder="Ad"
-              style={marginTop}
-              required={true}
-              name="name"
-              id="name"
-            />
-            <br />
-            <input
-              className="input"
-              type="email"
               placeholder="E-posta"
-              style={marginTop}
-              required={true}
-              name="email"
               id="email"
+              autoFocus={true}
+              style={marginTop}
             />
             <br />
-            <input
-              className="input"
+            <Input
               type="password"
               placeholder="Şifre"
-              style={marginTop}
-              required={true}
-              name="password"
               id="password"
+              style={marginTop}
             />
             <br />
-            <input
-              className="input"
+            <Input
               type="password"
               placeholder="Şifre Tekrarı"
-              style={marginTop}
-              required={true}
-              name="password_again"
               id="password_again"
+              style={marginTop}
             />
             <br />
             <button className="button" style={marginTop}>

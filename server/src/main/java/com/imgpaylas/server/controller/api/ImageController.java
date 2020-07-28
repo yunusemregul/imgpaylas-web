@@ -51,6 +51,7 @@ public class ImageController
 	@ResponseBody
 	public Image uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("description") String description)
 	{
+		// TODO: Check if multipart file is a valid image
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 

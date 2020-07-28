@@ -2,6 +2,8 @@ import React from "react";
 import Header from "../components/Header";
 import DivBackground from "../components/DivBackground";
 import { withRouter } from "react-router";
+import Input from "../components/Input";
+import queryString from "query-string";
 
 const marginTop = { marginTop: "20px" };
 
@@ -14,25 +16,19 @@ function Login(props) {
           <form className="center" method="post" action="/perform_login">
             <label className="form-label">Giriş Yap</label>
             <br />
-            <input
-              className="input"
+            <Input
               type="text"
               placeholder="E-posta"
-              required={true}
               id="email"
-              name="email"
               autoFocus={true}
               style={marginTop}
             />
             <br />
-            <input
-              className="input"
+            <Input
               type="password"
               placeholder="Şifre"
-              style={marginTop}
-              required={true}
               id="password"
-              name="password"
+              style={marginTop}
             />
             <br />
             <button className="button" style={marginTop}>
