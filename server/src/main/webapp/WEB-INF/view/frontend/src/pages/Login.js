@@ -19,8 +19,8 @@ function Login(props) {
               type="text"
               placeholder="E-posta"
               required={true}
-              id="username"
-              name="username"
+              id="email"
+              name="email"
               autoFocus={true}
               style={marginTop}
             />

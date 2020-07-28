@@ -18,27 +18,39 @@ export default function Register() {
               type="text"
               placeholder="Ad"
               style={marginTop}
+              required={true}
+              name="name"
+              id="name"
             />
             <br />
             <input
               className="input"
-              type="text"
+              type="email"
               placeholder="E-posta"
               style={marginTop}
+              required={true}
+              name="email"
+              id="email"
             />
             <br />
             <input
               className="input"
-              type="text"
+              type="password"
               placeholder="Şifre"
               style={marginTop}
+              required={true}
+              name="password"
+              id="password"
             />
             <br />
             <input
               className="input"
-              type="text"
+              type="password"
               placeholder="Şifre Tekrarı"
               style={marginTop}
+              required={true}
+              name="password_again"
+              id="password_again"
             />
             <br />
             <button className="button" style={marginTop}>

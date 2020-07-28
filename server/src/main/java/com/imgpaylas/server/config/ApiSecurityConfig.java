@@ -22,7 +22,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 				.permitAll();*/
 				.csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/api/**/user/register")
+				.antMatchers("/api/**/user/register", "/register")
 				.permitAll()
 				.antMatchers(
 						HttpMethod.GET,
@@ -30,9 +30,12 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 				.permitAll()
 				.anyRequest().authenticated()
 				.and()
-				.formLogin().loginPage("/index.html")
+				.formLogin()
+				.loginPage("/login")
+				.permitAll()
+				.usernameParameter("email")
 				.loginProcessingUrl("/perform_login")
-				.defaultSuccessUrl("/homepage.html", true)
+				.defaultSuccessUrl("/home", true)
 				.failureUrl("/index.html?error=true");
 	}
 

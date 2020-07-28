@@ -6,7 +6,14 @@ import "../assets/style/style.css";
 function Header(props) {
   return (
     <div className="header row-fixed">
-      <img src={logo} alt="logo" style={{ padding: 12, width: "64px" }} />
+      <img
+        src={logo}
+        alt="logo"
+        style={{ padding: 12, cursor: "pointer", width: "64px" }}
+        onClick={() => {
+          window.location.href = "/";
+        }}
+      />
     </div>
   );
 }

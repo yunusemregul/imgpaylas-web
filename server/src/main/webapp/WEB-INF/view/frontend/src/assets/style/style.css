@@ -66,6 +66,11 @@ body,
   height: 50px;
 }
 
+.button:hover {
+  background-color: #e7b324;
+  transition: 0.1s;
+}
+
 .header-button-login {
   background-color: transparent;
   color: white;
