@@ -111,7 +111,7 @@ body,
 }
 
 .form-label-error {
-  color: #ff2e2e;  
+  color: #ff2e2e;
 }
 
 .absolute-centerx {
@@ -124,4 +124,33 @@ body,
 a {
   font-size: 22px;
   color: #ffc72e;
+}
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -5px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 5px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  /* change div to reference your elements you put in <Masonry> */
+  background: grey;
+  margin-bottom: 5px;
+}
+
+.imagebox {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+.imagebox-desc {
+}
+
+.imagebox-imgbox {
 }

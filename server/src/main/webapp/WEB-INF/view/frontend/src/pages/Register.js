@@ -12,7 +12,7 @@ export default function Register() {
     const formData = new FormData(event.target);
 
     axios.post("/api/v1/user/register", formData).then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         axios.post("/perform_login", formData).then((result) => {
           console.log("perform login:");
           console.log(result);

@@ -1,9 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { withRouter } from "react-router";
 import DivBackground from "../components/DivBackground";
 import Header from "../components/Header";
 import Input from "../components/Input";
-import axios from "axios";
 
 const marginTop = { marginTop: "20px" };
 
@@ -17,7 +17,7 @@ function Login(props) {
     axios
       .post("/api/v1/auth/login", formData)
       .then((result) => {
-        if (result.status == 200) {
+        if (result.status === 200) {
           setError(""); // probably not needed
           window.location.href = "/home";
         }
