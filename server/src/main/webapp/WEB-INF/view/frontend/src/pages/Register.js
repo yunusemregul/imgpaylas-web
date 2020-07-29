@@ -10,12 +10,12 @@ export default function Register() {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const body = {};
-    formData.forEach((value, property) => (body[property] = value));
+
     axios.post("/api/v1/user/register", formData).then((response) => {
       if (response.status == 200) {
-        axios.post("/perform_login", formData).then(() => {
-          window.location.href = "/home";
+        axios.post("/perform_login", formData).then((result) => {
+          console.log("perform login:");
+          console.log(result);
         });
       }
     });

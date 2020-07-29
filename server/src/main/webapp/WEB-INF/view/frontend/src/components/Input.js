@@ -10,7 +10,11 @@ export default function Input(props) {
       id={props.id}
       name={props.id}
       autoFocus={props.autoFocus == null ? false : true} // daha iyi yöntem?
-      style={props.style}
+      style={
+        props.error
+          ? { ...props.style, borderBottom: "2px solid #ff2e2e" }
+          : props.style
+      }
       onChange={props.onChange ? props.onChange : () => {}}
     />
   );

@@ -3,6 +3,7 @@ package com.imgpaylas.server.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 {
-	// TODO: custom login controller
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
@@ -23,7 +23,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 				.permitAll();*/
 				.csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/api/**/user/register", "/register")
+				.antMatchers("/api/**/user/register", "/register", "/api/**/auth/**")
 				.permitAll()
 				.antMatchers(
 						HttpMethod.GET,
@@ -35,9 +35,15 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter
 				.loginPage("/login")
 				.permitAll()
 				.usernameParameter("email")
-				.loginProcessingUrl("/perform_login")
+				.loginProcessingUrl("/login")
 				.defaultSuccessUrl("/home", true)
 				.failureUrl("/login?error=true");
+	}
+
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception
+	{
+		return super.authenticationManagerBean();
 	}
 
 	@Bean
