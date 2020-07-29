@@ -12,7 +12,11 @@ export default function DivBackground(props) {
   return (
     <div
       className="row-fill"
-      style={props.color ? { color: props.color } : imageStyle}
+      style={
+        props.backgroundColor
+          ? { backgroundColor: props.backgroundColor }
+          : imageStyle
+      }
     >
       {props.children}
     </div>

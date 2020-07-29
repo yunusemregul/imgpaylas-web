@@ -42,11 +42,18 @@ public class Image
 		return String.format("%s/images/%d/%d", hostUrl, user.getId(), id);
 	}
 
-	@JsonProperty("user")
+	@JsonProperty("uid")
 	@JsonInclude
 	public Long getUserId()
 	{
 		return user.getId();
+	}
+
+	@JsonProperty("uname")
+	@JsonInclude
+	public String getUserName()
+	{
+		return user.getName();
 	}
 
 	public Long getId()

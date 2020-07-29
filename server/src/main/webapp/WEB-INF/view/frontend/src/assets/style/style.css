@@ -25,8 +25,9 @@ body,
 
 .header {
   background-color: #313131;
-  position: relative;
+  position: sticky;
   height: 60px;
+  top: 0px;
 }
 
 .clickable,
@@ -130,26 +131,38 @@ a {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */
   display: flex;
-  margin-left: -5px; /* gutter size offset */
+  margin-left: -20px; /* gutter size offset */
   width: auto;
+  padding: 20px;
 }
 .my-masonry-grid_column {
-  padding-left: 5px; /* gutter size */
+  padding-left: 20px; /* gutter size */
   background-clip: padding-box;
 }
 
 /* Style your items */
 .my-masonry-grid_column > div {
   /* change div to reference your elements you put in <Masonry> */
-  background: grey;
-  margin-bottom: 5px;
+  background: #313131;
+  margin-bottom: 20px;
 }
 
 .imagebox {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.imagebox:hover {
 }
 
 .imagebox-desc {
+  color: white;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 6px;
+  padding-bottom: 9px;
+  font-size: 16px;
 }
 
 .imagebox-imgbox {
