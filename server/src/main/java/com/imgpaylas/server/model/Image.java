@@ -3,10 +3,12 @@ package com.imgpaylas.server.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.imgpaylas.server.converter.ColorConverter;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.awt.*;
 
 @Entity
 @Table(name = "images")
@@ -28,6 +30,30 @@ public class Image
 	@NotNull
 	private String extension;
 
+	@NotNull
+	@JsonProperty("w")
+	private int width;
+
+	@NotNull
+	@JsonProperty("h")
+	private int height;
+
+	@NotNull
+	@Convert(converter = ColorConverter.class)
+	@Column(name = "avg_color")
+	@JsonIgnore
+	private Color avgColor; // fotoğrafın ortalama rengi, kullanıcılar fotoğrafı indirmeyi beklerken en azından rengini göstermek için
+
+	@JsonProperty("col")
+	@JsonInclude
+	public String getColorString()
+	{
+		return avgColor.getRed() + "," +
+				avgColor.getGreen() +
+				"," +
+				avgColor.getBlue();
+	}
+
 	@JsonIgnore
 	public String getImagePath()
 	{
@@ -38,8 +64,7 @@ public class Image
 	@JsonInclude
 	public String getURL()
 	{
-		String hostUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-		return String.format("%s/images/%d/%d", hostUrl, user.getId(), id);
+		return String.format("/images/%d/%d", user.getId(), id);
 	}
 
 	@JsonProperty("uid")
@@ -95,5 +120,35 @@ public class Image
 	public void setExtension(String extension)
 	{
 		this.extension = extension;
+	}
+
+	public int getWidth()
+	{
+		return width;
+	}
+
+	public void setWidth(int width)
+	{
+		this.width = width;
+	}
+
+	public int getHeight()
+	{
+		return height;
+	}
+
+	public void setHeight(int height)
+	{
+		this.height = height;
+	}
+
+	public Color getAvgColor()
+	{
+		return avgColor;
+	}
+
+	public void setAvgColor(Color avgColor)
+	{
+		this.avgColor = avgColor;
 	}
 }

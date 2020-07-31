@@ -3,6 +3,7 @@ body,
 #root {
   height: 100%;
   margin: 0;
+  background-color: #444444;
 }
 
 * {
@@ -28,6 +29,7 @@ body,
   position: sticky;
   height: 60px;
   top: 0px;
+  z-index: 1;
 }
 
 .clickable,
@@ -166,4 +168,10 @@ a {
 }
 
 .imagebox-imgbox {
+}
+
+.imagebox-img {
+}
+
+.imagebox-img:hover {
 }

@@ -18,7 +18,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="box">
+    <div className="box" style={{ height: "auto" }}>
       <Header />
       <DivBackground backgroundColor="#444444">
         <Masonry
@@ -27,14 +27,7 @@ export default function Home() {
           columnClassName="my-masonry-grid_column"
         >
           {images.map((image) => {
-            return (
-              <ImageBox
-                key={image.id}
-                desc={image.desc}
-                img={image.url}
-                user={image.uname}
-              />
-            );
+            return <ImageBox key={image.id} data={image} />;
           })}
         </Masonry>
       </DivBackground>

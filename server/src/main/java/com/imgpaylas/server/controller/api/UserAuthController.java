@@ -31,7 +31,7 @@ public class UserAuthController
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	// TODO: Limit failed login attempts
+	// TODO: hatalı giriş sayısını limitlemek
 
 	@PostMapping(path = "/login")
 	public @ResponseBody

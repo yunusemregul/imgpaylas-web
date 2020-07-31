@@ -5,12 +5,19 @@ import com.imgpaylas.server.repository.IImageRepository;
 import com.imgpaylas.server.repository.IUserRepository;
 import com.imgpaylas.server.service.IImageStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Controller
@@ -47,23 +54,49 @@ public class ImageController
 		return imageRepository.findAll();
 	}
 
-	@PostMapping(path = "/upload")
+	@PutMapping(path = "/upload")
 	@ResponseBody
-	public Image uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("description") String description)
+	public ResponseEntity<Image> uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("description") String description)
 	{
-		// TODO: Check if multipart file is a valid image
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
 
-		Image newImage = new Image();
-		newImage.setUser(userRepository.findByEmail(email));
-		newImage.setDescription(description);
-		newImage.setExtension(storageService.getImageExtension(file));
+		// https://stackoverflow.com/a/4169776/12734824
+		// https://stackoverflow.com/a/4427443/12734824
+		try (InputStream input = file.getInputStream())
+		{
+			BufferedImage image = ImageIO.read(input);
+			if (image != null) // eğer yüklenen dosya bir fotoğrafsa
+			{
+				// fotoğrafı 1x1 boyuta küçültüp ortalama rengini bulmuş oluyoruz
+				java.awt.Image scaled = image.getScaledInstance(1, 1, java.awt.Image.SCALE_AREA_AVERAGING);
+				BufferedImage scaledImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+				scaledImage.getGraphics().drawImage(scaled, 0, 0, null);
+				Color avgColor = new Color(scaledImage.getRGB(0, 0));
 
-		newImage = imageRepository.save(newImage);
-		storageService.store(newImage, file);
+				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+				String email = auth.getName();
 
-		return newImage;
+				Image newImage = new Image();
+				newImage.setUser(userRepository.findByEmail(email));
+				newImage.setDescription(description);
+				newImage.setExtension(storageService.getImageExtension(file));
+				newImage.setWidth(image.getWidth());
+				newImage.setHeight(image.getHeight());
+				newImage.setAvgColor(avgColor);
+
+				newImage = imageRepository.save(newImage);
+				storageService.store(newImage, file);
+
+				return ResponseEntity.ok().body(newImage);
+			} else
+			{
+				// TODO: hata: sadece fotoğraf dosyaları yüklenebilir
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+			}
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	@PostMapping(path = "/delete")
