@@ -8,7 +8,7 @@ export default function ImageBox({ data }) {
     <div className="imagebox">
       <div
         className="imagebox-imgbox"
-        style={{ backgroundColor: "rgba(" + data.col + ", 1)" }} // fotoğraf yüklenmeden fotoğrafın ortalama rengini gösteriyoruz
+        style={{ backgroundColor: "rgba(" + data.col + ", 1)" }} // fotoğraf yüklenene kadar temsilen fotoğrafın ortalama rengini gösteriyoruz
       >
         <img
           className="imagebox-img"
@@ -33,6 +33,7 @@ export default function ImageBox({ data }) {
           src={icon_profile}
           width="20px"
           style={{ transform: "translateY(4px)", marginRight: "6px" }}
+          alt=""
         />
         {data.uname}
       </div>

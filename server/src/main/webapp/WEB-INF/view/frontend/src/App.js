@@ -12,6 +12,7 @@ function App() {
       <Route path="/index.html" component={Login} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+
       <Route path="/home" component={Home} />
     </BrowserRouter>
   );

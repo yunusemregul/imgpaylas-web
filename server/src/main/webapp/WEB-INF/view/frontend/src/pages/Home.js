@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <div className="box" style={{ height: "auto" }}>
-      <Header />
+      <Header title="Ana Sayfa" />
       <DivBackground backgroundColor="#444444">
         <Masonry
           breakpointCols={3}

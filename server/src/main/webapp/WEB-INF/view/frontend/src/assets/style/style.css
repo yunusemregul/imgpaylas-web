@@ -32,6 +32,18 @@ body,
   z-index: 1;
 }
 
+.header-title {
+  flex: 1 1 auto;
+  text-align: center;
+  color: white;
+  font-size: 22px;
+  align-self: center;
+}
+
+.header-navbuttons {
+  align-self: center;
+}
+
 .clickable,
 .button,
 .header-button {
