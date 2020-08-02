@@ -1,8 +1,6 @@
 package com.imgpaylas.server.controller.api;
 
-import com.imgpaylas.server.model.Image;
 import com.imgpaylas.server.model.Like;
-import com.imgpaylas.server.model.User;
 import com.imgpaylas.server.repository.IImageRepository;
 import com.imgpaylas.server.repository.ILikeRepository;
 import com.imgpaylas.server.repository.IUserRepository;
@@ -40,7 +38,7 @@ public class LikeController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 
-		return userRepository.findByEmail(email).getLikes();
+		return userRepository.findByEmail(email).getLikedImageIds();
 	}
 
 	@GetMapping(path = "/my_likes/{image_id}")

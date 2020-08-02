@@ -1,7 +1,9 @@
 package com.imgpaylas.server.controller.api;
 
 import com.imgpaylas.server.model.Image;
+import com.imgpaylas.server.model.Like;
 import com.imgpaylas.server.repository.IImageRepository;
+import com.imgpaylas.server.repository.ILikeRepository;
 import com.imgpaylas.server.repository.IUserRepository;
 import com.imgpaylas.server.service.IImageStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("api/v1/image")
@@ -33,11 +36,13 @@ public class ImageController
 	@Autowired
 	private IImageStorageService storageService;
 
+	@Autowired
+	private ILikeRepository likeRepository;
+
 	@GetMapping(path = "/{image_id}")
 	@ResponseBody
 	public Image imageInfoById(@PathVariable Long image_id)
 	{
-		System.out.println("request!");
 		return imageRepository.findById(image_id);
 	}
 
@@ -53,6 +58,18 @@ public class ImageController
 	public Iterable<Image> getAllImages()
 	{
 		return imageRepository.findAll();
+	}
+
+	@GetMapping(path = "/my_likes")
+	@ResponseBody
+	public List<Image> userLikes()
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+
+		List<Like> likes = userRepository.findByEmail(email).getLikes();
+
+		return likes.stream().map(Like::getImage).collect(Collectors.toList());
 	}
 
 	@PutMapping(path = "/upload")

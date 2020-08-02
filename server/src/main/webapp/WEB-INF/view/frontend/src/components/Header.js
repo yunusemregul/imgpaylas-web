@@ -29,6 +29,10 @@ function Header(props) {
     return () => {};
   }, [props.match.path]);
 
+  function navigate(where) {
+    if (props.match.path != where) props.history.push(where);
+  }
+
   return (
     <div className="header row-fixed" style={{ display: "flex" }}>
       <img
@@ -55,18 +59,27 @@ function Header(props) {
               className="clickable"
               src={props.match.path === "/home" ? home_focused : home}
               alt=""
+              onClick={() => {
+                navigate("/home");
+              }}
             />
             <img
               className="clickable"
               src={props.match.path === "/likes" ? likes_focused : likes}
               style={leftMargin}
               alt=""
+              onClick={() => {
+                navigate("/likes");
+              }}
             />
             <img
               className="clickable"
               src={props.match.path === "/profile" ? profile_focused : profile}
               style={{ ...leftMargin, marginRight: 12 }}
               alt=""
+              onClick={() => {
+                navigate("/profile");
+              }}
             />
           </div>
         </>

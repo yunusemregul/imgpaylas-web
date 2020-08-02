@@ -34,8 +34,8 @@ public class UserAuthController
 	// TODO: hatalı giriş sayısını limitlemek
 
 	@PostMapping(path = "/login")
-	public @ResponseBody
-	ResponseEntity<String> login(@RequestParam String email, @RequestParam String password)
+	@ResponseBody
+	public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password)
 	{
 		try
 		{
@@ -55,8 +55,8 @@ public class UserAuthController
 	}
 
 	@PostMapping(path = "/register")
-	public @ResponseBody
-	Object register(@RequestParam String name, @RequestParam String email, @RequestParam String password)
+	@ResponseBody
+	public Object register(@RequestParam String name, @RequestParam String email, @RequestParam String password)
 	{
 		User newUser = new User();
 		newUser.setName(name);

@@ -30,9 +30,14 @@ public class User
 	@JsonIgnore
 	private List<Like> likes;
 
-	public List<Long> getLikes()
+	public List<Long> getLikedImageIds()
 	{
 		return likes.stream().map(Like::getImageId).collect(Collectors.toList());
+	}
+
+	public List<Like> getLikes()
+	{
+		return likes;
 	}
 
 	public Long getId()

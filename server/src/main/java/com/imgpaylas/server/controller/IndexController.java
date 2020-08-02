@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController
 {
-	@GetMapping({"/login", "/register", "/", "/home"})
+	@GetMapping({"/login", "/register", "/", "/home", "/likes", "/profile"}) // daha iyi bir yol bulunmalı
 	public String index()
 	{
 		return "index.html";

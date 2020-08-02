@@ -1,11 +1,10 @@
 package com.imgpaylas.server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.imgpaylas.server.converter.ColorConverter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "images")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // TODO: understand what this is
 public class Image
 {
 	@Id
