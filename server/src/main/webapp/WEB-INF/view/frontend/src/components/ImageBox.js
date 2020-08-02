@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import icon_profile from "../assets/images/icon_profile.png";
+import icon_likes from "../assets/images/icon_likes.png";
+import axios from "axios";
 
 export default function ImageBox({ data }) {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -27,15 +29,28 @@ export default function ImageBox({ data }) {
         />
       </div>
       <div className="imagebox-desc">
-        {data.desc}
-        <br />
-        <img
-          src={icon_profile}
-          width="20px"
-          style={{ transform: "translateY(4px)", marginRight: "6px" }}
-          alt=""
-        />
-        {data.uname}
+        <div style={{ flex: "1 1 auto" }}>
+          {data.desc}
+          <br />
+          <img
+            src={icon_profile}
+            width="20px"
+            style={{ transform: "translateY(5px)", marginRight: "5px" }}
+            alt=""
+          />
+          {data.uname}
+        </div>
+        <div
+          onClick={() => {
+            axios.put("/api/v1/like/image/" + data.id);
+          }}
+        >
+          {data.likes}{" "}
+          <img
+            style={{ width: "20px", transform: "translateY(5px)" }}
+            src={icon_likes}
+          />
+        </div>
       </div>
     </div>
   );

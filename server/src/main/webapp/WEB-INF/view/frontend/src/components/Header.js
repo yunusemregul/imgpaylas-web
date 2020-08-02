@@ -17,7 +17,11 @@ function Header(props) {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (props.match.path === "/login" || props.match.path === "/register") {
+    if (
+      props.match.path === "/" ||
+      props.match.path === "/login" ||
+      props.match.path === "/register"
+    ) {
       setLoggedIn(false);
     } else {
       setLoggedIn(true);
@@ -43,26 +47,30 @@ function Header(props) {
           }
         }}
       />
-      <div className="header-title">{props.title}</div>
-      <div className="header-navbuttons">
-        <img
-          className="clickable"
-          src={props.match.path === "/home" ? home_focused : home}
-          alt=""
-        />
-        <img
-          className="clickable"
-          src={props.match.path === "/likes" ? likes_focused : likes}
-          style={leftMargin}
-          alt=""
-        />
-        <img
-          className="clickable"
-          src={props.match.path === "/profile" ? profile_focused : profile}
-          style={{ ...leftMargin, marginRight: 12 }}
-          alt=""
-        />
-      </div>
+      {isLoggedIn && (
+        <>
+          <div className="header-title">{props.title}</div>
+          <div className="header-navbuttons">
+            <img
+              className="clickable"
+              src={props.match.path === "/home" ? home_focused : home}
+              alt=""
+            />
+            <img
+              className="clickable"
+              src={props.match.path === "/likes" ? likes_focused : likes}
+              style={leftMargin}
+              alt=""
+            />
+            <img
+              className="clickable"
+              src={props.match.path === "/profile" ? profile_focused : profile}
+              style={{ ...leftMargin, marginRight: 12 }}
+              alt=""
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -177,6 +177,7 @@ a {
   padding-top: 6px;
   padding-bottom: 9px;
   font-size: 16px;
+  display: flex;
 }
 
 .imagebox-imgbox {

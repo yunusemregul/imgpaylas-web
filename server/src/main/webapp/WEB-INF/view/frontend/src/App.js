@@ -4,6 +4,8 @@ import "./assets/style/style.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import Likes from "./pages/Likes";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Route path="/register" component={Register} />
 
       <Route path="/home" component={Home} />
+      <Route path="/likes" component={Likes} />
+      <Route path="/profile" component={Profile} />
     </BrowserRouter>
   );
 }

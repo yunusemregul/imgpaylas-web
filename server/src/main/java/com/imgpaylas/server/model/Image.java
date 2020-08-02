@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.imgpaylas.server.converter.ColorConverter;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
+import java.util.List;
 
 @Entity
 @Table(name = "images")
@@ -26,6 +26,10 @@ public class Image
 
 	@JsonProperty("desc")
 	private String description;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
+	@JsonIgnore
+	private List<Like> likes;
 
 	@NotNull
 	private String extension;
@@ -52,6 +56,13 @@ public class Image
 				avgColor.getGreen() +
 				"," +
 				avgColor.getBlue();
+	}
+
+	@JsonProperty("likes")
+	@JsonInclude
+	public int getLikesCount()
+	{
+		return likes.size();
 	}
 
 	@JsonIgnore
