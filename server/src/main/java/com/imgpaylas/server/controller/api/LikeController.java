@@ -31,6 +31,7 @@ public class LikeController
 		return likeRepository.countByImage(imageRepository.findById(image_id));
 	}
 
+	// şuanki kullanıcının beğendiği fotoğrafların idlerini döndürüyor
 	@GetMapping(path = "/my_likes")
 	@ResponseBody
 	public List<Long> userLikes()

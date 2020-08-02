@@ -8,5 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface ILikeRepository extends CrudRepository<Like, Integer>
 {
 	Like findByUserAndImage(User user, Image image);
+
 	Long countByImage(Image image);
 }

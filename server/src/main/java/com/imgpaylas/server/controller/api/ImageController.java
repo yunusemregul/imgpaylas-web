@@ -60,6 +60,7 @@ public class ImageController
 		return imageRepository.findAll();
 	}
 
+	// şuanki kullanıcının beğendiği fotoğrafları döndürüyor
 	@GetMapping(path = "/my_likes")
 	@ResponseBody
 	public List<Image> userLikes()

@@ -30,7 +30,7 @@ function Header(props) {
   }, [props.match.path]);
 
   function navigate(where) {
-    if (props.match.path != where) props.history.push(where);
+    if (props.match.path !== where) props.history.push(where);
   }
 
   return (

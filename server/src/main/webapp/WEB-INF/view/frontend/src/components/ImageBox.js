@@ -21,7 +21,9 @@ export default function ImageBox(props) {
     <div className="imagebox">
       <div
         className="imagebox-imgbox"
-        style={{ backgroundColor: "rgba(" + data.col + ", 1)" }} // fotoğraf yüklenene kadar temsilen fotoğrafın ortalama rengini gösteriyoruz
+        style={
+          !imageLoaded ? { backgroundColor: "rgba(" + data.col + ", 1)" } : {}
+        } // fotoğraf yüklenene kadar temsilen fotoğrafın ortalama rengini gösteriyoruz
       >
         <img
           className="imagebox-img"
@@ -31,7 +33,7 @@ export default function ImageBox(props) {
           height={
             // fotoğraf daha yüklenmediğinde fotoğrafın yüksekliğini temsilen gösteriyoruz
             // fotoğraf yüklendiğinde layoutta hareketlilik olmasın diye
-            !imageLoaded && data.h / (data.w / (window.innerWidth / 3.333))
+            !imageLoaded && data.h / (data.w / (window.innerWidth / 3.333)) + 8
           }
           style={{ width: "100%" }}
           onLoad={() => {
@@ -55,7 +57,7 @@ export default function ImageBox(props) {
           onClick={() => {
             const method = userLiked ? axios.delete : axios.put;
             method("/api/v1/like/image/" + data.id).then((res) => {
-              if (res.status == 200) {
+              if (res.status === 200) {
                 setUserLiked(!userLiked);
                 refreshData();
               }
@@ -67,6 +69,7 @@ export default function ImageBox(props) {
           <img
             style={{ width: "20px", transform: "translateY(5px)" }}
             src={userLiked ? icon_likes_focused : icon_likes}
+            alt=""
           />
         </div>
       </div>
