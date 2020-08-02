@@ -33,6 +33,27 @@ public class LikeController
 		return likeRepository.countByImage(imageRepository.findById(image_id));
 	}
 
+	@GetMapping(path = "/my_likes")
+	@ResponseBody
+	public List<Long> userLikes()
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+
+		return userRepository.findByEmail(email).getLikes();
+	}
+
+	@GetMapping(path = "/my_likes/{image_id}")
+	@ResponseBody
+	public boolean userLikedImage(@PathVariable Long image_id)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+
+		Like like = likeRepository.findByUserAndImage(userRepository.findByEmail(email), imageRepository.findById(image_id));
+
+		return like != null;
+	}
 
 	@PutMapping(path = "/image/{image_id}")
 	public @ResponseBody

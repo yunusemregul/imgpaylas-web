@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import icon_profile from "../assets/images/icon_profile.png";
 import icon_likes from "../assets/images/icon_likes.png";
+import icon_likes_focused from "../assets/images/icon_likes_focused.png";
 import axios from "axios";
 
-export default function ImageBox({ data }) {
+export default function ImageBox(props) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [userLiked, setUserLiked] = useState(props.userLiked); // bad practice?
+  const [data, setData] = useState(props.data); // bad practice?
+
+  function refreshData() {
+    axios.get("/api/v1/image/" + data.id).then((res) => {
+      if (res.status === 200) {
+        setData(res.data);
+      }
+    });
+  }
 
   return (
     <div className="imagebox">
@@ -42,13 +53,20 @@ export default function ImageBox({ data }) {
         </div>
         <div
           onClick={() => {
-            axios.put("/api/v1/like/image/" + data.id);
+            const method = userLiked ? axios.delete : axios.put;
+            method("/api/v1/like/image/" + data.id).then((res) => {
+              if (res.status == 200) {
+                setUserLiked(!userLiked);
+                refreshData();
+              }
+            });
           }}
+          style={userLiked ? { color: "#FFC72E" } : {}}
         >
           {data.likes}{" "}
           <img
             style={{ width: "20px", transform: "translateY(5px)" }}
-            src={icon_likes}
+            src={userLiked ? icon_likes_focused : icon_likes}
           />
         </div>
       </div>

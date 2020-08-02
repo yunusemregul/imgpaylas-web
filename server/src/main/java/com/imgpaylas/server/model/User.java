@@ -1,9 +1,12 @@
 package com.imgpaylas.server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -22,6 +25,15 @@ public class User
 
 	@Column(unique = true)
 	private String email;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@JsonIgnore
+	private List<Like> likes;
+
+	public List<Long> getLikes()
+	{
+		return likes.stream().map(Like::getImageId).collect(Collectors.toList());
+	}
 
 	public Long getId()
 	{

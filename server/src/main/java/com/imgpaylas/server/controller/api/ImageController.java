@@ -33,14 +33,15 @@ public class ImageController
 	@Autowired
 	private IImageStorageService storageService;
 
-	@GetMapping(value = "user/{user_id}/{image_id}")
+	@GetMapping(path = "/{image_id}")
 	@ResponseBody
-	public Image imageInfo(@PathVariable Long user_id, @PathVariable Long image_id)
+	public Image imageInfoById(@PathVariable Long image_id)
 	{
+		System.out.println("request!");
 		return imageRepository.findById(image_id);
 	}
 
-	@GetMapping(value = "user/{user_id}/all")
+	@GetMapping(path = "/user/{user_id}/all")
 	@ResponseBody
 	public List<Image> userAllImages(@PathVariable Long user_id)
 	{
@@ -48,8 +49,8 @@ public class ImageController
 	}
 
 	@GetMapping(path = "/all")
-	public @ResponseBody
-	Iterable<Image> getAllImages()
+	@ResponseBody
+	public Iterable<Image> getAllImages()
 	{
 		return imageRepository.findAll();
 	}

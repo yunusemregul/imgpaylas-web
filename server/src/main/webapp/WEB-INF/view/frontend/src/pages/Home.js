@@ -7,11 +7,22 @@ import ImageBox from "../components/ImageBox";
 
 export default function Home() {
   const [images, setImages] = useState([]);
+  const [likes, setLikes] = useState([]);
+
+  /*
+    images: database deki tüm fotoğraflar
+    likes: kullanıcının beğendiği fotoğraflar
+  */
 
   useEffect(() => {
     axios.get("/api/v1/image/all").then((res) => {
       if (res.status === 200) {
         setImages(res.data);
+      }
+    });
+    axios.get("/api/v1/like/my_likes").then((res) => {
+      if (res.status === 200) {
+        setLikes(res.data);
       }
     });
     return () => {};
@@ -27,7 +38,13 @@ export default function Home() {
           columnClassName="my-masonry-grid_column"
         >
           {images.map((image) => {
-            return <ImageBox key={image.id} data={image} />;
+            return (
+              <ImageBox
+                key={image.id}
+                data={image}
+                userLiked={likes.includes(image.id)}
+              />
+            );
           })}
         </Masonry>
       </DivBackground>
