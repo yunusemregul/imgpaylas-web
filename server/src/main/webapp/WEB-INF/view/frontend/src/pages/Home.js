@@ -1,9 +1,9 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DivBackground from "../components/DivBackground";
 import Header from "../components/Header";
-import axios from "axios";
-import Masonry from "react-masonry-css";
 import ImageBox from "../components/ImageBox";
+import ResponsiveMasonry from "../components/ResponsiveMasonry";
 
 export default function Home() {
   const [images, setImages] = useState([]);
@@ -32,11 +32,7 @@ export default function Home() {
     <div className="box" style={{ height: "auto" }}>
       <Header title="Ana Sayfa" />
       <DivBackground backgroundColor="#444444">
-        <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
+        <ResponsiveMasonry>
           {images.map((image) => {
             return (
               <ImageBox
@@ -46,7 +42,7 @@ export default function Home() {
               />
             );
           })}
-        </Masonry>
+        </ResponsiveMasonry>
       </DivBackground>
     </div>
   );

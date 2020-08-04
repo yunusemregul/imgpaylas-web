@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
-import DivBackground from "../components/DivBackground";
-import Masonry from "react-masonry-css";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import DivBackground from "../components/DivBackground";
+import Header from "../components/Header";
 import ImageBox from "../components/ImageBox";
+import ResponsiveMasonry from "../components/ResponsiveMasonry";
 
 export default function Likes() {
   const [likes, setLikes] = useState([]);
@@ -21,15 +21,11 @@ export default function Likes() {
     <div className="box" style={{ height: "auto" }}>
       <Header title="Beğendiklerin" />
       <DivBackground backgroundColor="#444444">
-        <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
+        <ResponsiveMasonry>
           {likes.map((image) => {
             return <ImageBox key={image.id} data={image} userLiked={true} />;
           })}
-        </Masonry>
+        </ResponsiveMasonry>
       </DivBackground>
     </div>
   );
