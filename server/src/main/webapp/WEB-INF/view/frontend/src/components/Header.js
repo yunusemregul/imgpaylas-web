@@ -8,6 +8,8 @@ import likes from "../assets/images/icon_likes.png";
 import likes_focused from "../assets/images/icon_likes_focused.png";
 import profile from "../assets/images/icon_profile.png";
 import profile_focused from "../assets/images/icon_profile_focused.png";
+import upload from "../assets/images/icon_upload.png";
+import upload_focused from "../assets/images/icon_upload_focused.png";
 
 const leftMargin = {
   marginLeft: 12,
@@ -70,6 +72,15 @@ function Header(props) {
               alt=""
               onClick={() => {
                 navigate("/likes");
+              }}
+            />
+            <img
+              className="clickable"
+              src={props.match.path === "/upload" ? upload_focused : upload}
+              style={leftMargin}
+              alt=""
+              onClick={() => {
+                navigate("/upload");
               }}
             />
             <img

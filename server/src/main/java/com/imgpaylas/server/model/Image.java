@@ -9,6 +9,7 @@ import com.imgpaylas.server.converter.ColorConverter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class Image
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
 	@JsonIgnore
-	private List<Like> likes;
+	private List<Like> likes = new ArrayList<Like>();
 
 	@NotNull
 	private String extension;
@@ -164,4 +165,15 @@ public class Image
 	{
 		this.avgColor = avgColor;
 	}
+
+	public List<Like> getLikes()
+	{
+		return likes;
+	}
+
+	public void setLikes(List<Like> likes)
+	{
+		this.likes = likes;
+	}
+
 }

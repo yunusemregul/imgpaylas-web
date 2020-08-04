@@ -6,6 +6,7 @@ import Likes from "./pages/Likes";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import Upload from "./pages/Upload";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/home" component={Home} />
       <Route path="/likes" component={Likes} />
       <Route path="/profile" component={Profile} />
+      <Route path="/upload" component={Upload} />
     </BrowserRouter>
   );
 }

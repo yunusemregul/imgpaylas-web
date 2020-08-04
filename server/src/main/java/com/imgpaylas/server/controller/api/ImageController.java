@@ -73,6 +73,17 @@ public class ImageController
 		return likes.stream().map(Like::getImage).collect(Collectors.toList());
 	}
 
+	// şuanki kullanıcının yüklediği fotoğrafları döndürüyor
+	@GetMapping(path = "/my_images")
+	@ResponseBody
+	public List<Image> userImages()
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+
+		return imageRepository.findAllByUser(userRepository.findByEmail(email));
+	}
+
 	@PutMapping(path = "/upload")
 	@ResponseBody
 	public ResponseEntity<Image> uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("description") String description)
