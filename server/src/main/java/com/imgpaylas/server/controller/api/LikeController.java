@@ -54,7 +54,7 @@ public class LikeController
 		return like != null;
 	}
 
-	@PutMapping(path = "/image/{image_id}")
+	@PostMapping(path = "/image/{image_id}")
 	public @ResponseBody
 	Like likeImage(@PathVariable Long image_id)
 	{
@@ -78,6 +78,7 @@ public class LikeController
 
 		Like like = likeRepository.findByUserAndImage(userRepository.findByEmail(email), imageRepository.findById(image_id));
 
-		likeRepository.delete(like);
+		if (like != null)
+			likeRepository.delete(like);
 	}
 }

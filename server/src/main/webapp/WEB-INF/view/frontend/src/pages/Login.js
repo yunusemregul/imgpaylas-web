@@ -5,6 +5,8 @@ import DivBackground from "../components/DivBackground";
 import Header from "../components/Header";
 import Input from "../components/Input";
 
+// TODO: responsive
+
 const marginTop = { marginTop: "20px" };
 
 function Login(props) {

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import icon_profile from "../assets/images/icon_profile.png";
+import axios from "axios";
+import React, { useState } from "react";
 import icon_likes from "../assets/images/icon_likes.png";
 import icon_likes_focused from "../assets/images/icon_likes_focused.png";
-import axios from "axios";
+import icon_profile from "../assets/images/icon_profile.png";
 
 export default function ImageBox(props) {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -33,7 +33,12 @@ export default function ImageBox(props) {
           height={
             // fotoğraf daha yüklenmediğinde fotoğrafın yüksekliğini temsilen gösteriyoruz
             // fotoğraf yüklendiğinde layoutta hareketlilik olmasın diye
-            !imageLoaded && data.h / (data.w / (window.innerWidth / 3.333)) + 8
+            // TODO: çok düzgün çalışmıyor
+            !imageLoaded &&
+            data.h /
+              (data.w /
+                (window.innerWidth /
+                  (window.innerWidth < 400 ? 1 : window.innerWidth / 400)))
           }
           style={{ width: "100%" }}
           onLoad={() => {
@@ -55,7 +60,7 @@ export default function ImageBox(props) {
         </div>
         <div
           onClick={() => {
-            const method = userLiked ? axios.delete : axios.put;
+            const method = userLiked ? axios.delete : axios.post;
             method("/api/v1/like/image/" + data.id).then((res) => {
               if (res.status === 200) {
                 setUserLiked(!userLiked);

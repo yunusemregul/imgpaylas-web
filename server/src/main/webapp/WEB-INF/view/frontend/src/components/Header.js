@@ -12,7 +12,7 @@ import upload from "../assets/images/icon_upload.png";
 import upload_focused from "../assets/images/icon_upload_focused.png";
 
 const leftMargin = {
-  marginLeft: 12,
+  marginLeft: 20,
 };
 
 function Header(props) {
@@ -86,7 +86,7 @@ function Header(props) {
             <img
               className="clickable"
               src={props.match.path === "/profile" ? profile_focused : profile}
-              style={{ ...leftMargin, marginRight: 12 }}
+              style={{ ...leftMargin, marginRight: 20 }}
               alt=""
               onClick={() => {
                 navigate("/profile");

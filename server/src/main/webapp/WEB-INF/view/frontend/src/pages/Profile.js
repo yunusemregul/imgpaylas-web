@@ -4,7 +4,6 @@ import DivBackground from "../components/DivBackground";
 import Header from "../components/Header";
 import ImageBox from "../components/ImageBox";
 import ResponsiveMasonry from "../components/ResponsiveMasonry";
-import Input from "../components/Input";
 
 export default function Profile() {
   const [images, setImages] = useState([]);

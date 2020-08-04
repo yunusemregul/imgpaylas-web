@@ -10,7 +10,7 @@ export default function Upload() {
     const formData = new FormData(event.target);
 
     axios
-      .put("/api/v1/image/upload", formData)
+      .post("/api/v1/image/upload", formData)
       .then((result) => {
         if (result.status === 200) {
           console.log(result);

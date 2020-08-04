@@ -12,6 +12,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: created_at gibi bir field
+
 @Entity
 @Table(name = "images")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // TODO: understand what this is
@@ -30,7 +32,7 @@ public class Image
 	@JsonProperty("desc")
 	private String description;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "image")
 	@JsonIgnore
 	private List<Like> likes = new ArrayList<Like>();
 

@@ -41,7 +41,7 @@ public class LikeAPITests
 	{
 		mockMvc.perform(
 				MockMvcRequestBuilders
-						.put("/api/v1/like/image/1")
+						.post("/api/v1/like/image/1")
 		)
 				.andExpect(status().isOk());
 	}

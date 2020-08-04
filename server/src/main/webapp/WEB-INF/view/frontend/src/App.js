@@ -8,6 +8,9 @@ import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Upload from "./pages/Upload";
 
+// TODO: giriş yapıldıysa /, /index.html bunlar /home ye yönlendirmeli
+// TODO: home, likes sayfaları arası geçişlerde sayfalar reload yiyor düzeltilmeli
+
 function App() {
   return (
     <BrowserRouter>

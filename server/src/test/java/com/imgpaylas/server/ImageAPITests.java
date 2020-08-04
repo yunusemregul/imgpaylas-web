@@ -19,6 +19,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Base64;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -47,7 +51,8 @@ public class ImageAPITests
 	@WithMockUser(username = "test@imgpaylas.com")
 	public void test1_uploadImage() throws Exception
 	{
-		MockMultipartFile mockImage = new MockMultipartFile("image", "test.png", "image/png", "data".getBytes());
+		String placeholder = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==";
+		MockMultipartFile mockImage = new MockMultipartFile("image", "test.png", "image/png", Base64.getDecoder().decode(placeholder));
 
 		MvcResult result = mockMvc.perform(
 				MockMvcRequestBuilders
@@ -69,7 +74,7 @@ public class ImageAPITests
 	{
 		mockMvc.perform(
 				MockMvcRequestBuilders
-						.post("/api/v1/image/delete")
+						.delete("/api/v1/image/delete")
 						.param("image_id", "" + uploadedImageId)
 		)
 				.andExpect(status().isOk());

@@ -84,7 +84,7 @@ public class ImageController
 		return imageRepository.findAllByUser(userRepository.findByEmail(email));
 	}
 
-	@PutMapping(path = "/upload")
+	@PostMapping(path = "/upload")
 	@ResponseBody
 	public ResponseEntity<Image> uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("description") String description)
 	{
@@ -129,7 +129,7 @@ public class ImageController
 		}
 	}
 
-	@PostMapping(path = "/delete")
+	@DeleteMapping(path = "/delete")
 	@ResponseBody
 	public void deleteImage(@RequestParam Long image_id)
 	{
