@@ -1,11 +1,16 @@
 package com.imgpaylas.server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+// TODO: roller? admin rolü?
 
 @Entity
 @Table(name = "users")
@@ -15,11 +20,16 @@ public class User
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@CreationTimestamp
+	@Column(name = "created_at")
+	private Instant createdAt;
+
 	@NotNull
 	@Column(name = "password_hash")
 	private String passwordHash;
 
 	@NotNull
+	@Column(unique = true)
 	private String name;
 
 	@Column(unique = true)
@@ -27,7 +37,7 @@ public class User
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	@JsonIgnore
-	private List<Like> likes;
+	private List<Like> likes = new ArrayList<Like>();
 
 	public List<Long> getLikedImageIds()
 	{
@@ -78,5 +88,20 @@ public class User
 	public void setEmail(String email)
 	{
 		this.email = email;
+	}
+
+	public Instant getCreatedAt()
+	{
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt)
+	{
+		this.createdAt = createdAt;
+	}
+
+	public void setLikes(List<Like> likes)
+	{
+		this.likes = likes;
 	}
 }

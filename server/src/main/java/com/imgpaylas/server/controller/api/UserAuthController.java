@@ -53,6 +53,7 @@ public class UserAuthController
 		}
 	}
 
+	// TODO: kullanıcı adının içinde boşluk vs olmamalı kullanıcı adının uygunluğu kontrol edilmeli
 	@PostMapping(path = "/register")
 	@ResponseBody
 	public Object register(@RequestParam String name, @RequestParam String email, @RequestParam String password)

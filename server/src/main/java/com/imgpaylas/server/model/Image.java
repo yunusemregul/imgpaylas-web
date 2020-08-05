@@ -5,10 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.imgpaylas.server.converter.ColorConverter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,10 @@ public class Image
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@CreationTimestamp
+	@Column(name = "created_at")
+	private Instant createdAt;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
@@ -178,4 +184,13 @@ public class Image
 		this.likes = likes;
 	}
 
+	public Instant getCreatedAt()
+	{
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt)
+	{
+		this.createdAt = createdAt;
+	}
 }

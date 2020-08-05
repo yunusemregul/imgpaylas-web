@@ -5,26 +5,32 @@ import Input from "../components/Input";
 import axios from "axios";
 import Dropzone from "react-dropzone";
 
-// TODO: tasarım belki revise edilebilir pek güzel değil
+// TODO: tasarım belki revize edilebilir pek güzel değil
 
 export default function Upload() {
   const [image, setImage] = useState();
 
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    if (!formData.has("image")) {
-      formData.append("image", image, image.name);
+
+    if (!image) {
+      console.log("fotograf secilmemis");
+      return;
     }
+
+    const formData = new FormData(event.target);
+
+    formData.set("image", image, image.name);
+
     axios
       .post("/api/v1/image/upload", formData)
       .then((result) => {
         if (result.status === 200) {
-          console.log(result);
+          console.log(result); // TODO: başarılı yükleme ekranı göster
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error); // TODO: yüklenirken hata ekranı göster
       });
   }
 
@@ -45,7 +51,6 @@ export default function Upload() {
               setImage(
                 Object.assign(img, { preview: URL.createObjectURL(img) })
               );
-              console.log(acceptedFiles);
             }}
           >
             {({ getRootProps, getInputProps, isDragActive }) => (
