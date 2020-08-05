@@ -188,3 +188,15 @@ a {
 
 .imagebox-img:hover {
 }
+
+.div-upload {
+  background-color: white;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  min-height: 200px;
+  justify-content: center;
+  border: 0px;
+  overflow: hidden;
+  outline: 0px;
+}

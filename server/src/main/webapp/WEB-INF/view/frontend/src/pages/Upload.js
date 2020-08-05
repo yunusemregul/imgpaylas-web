@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import DivBackground from "../components/DivBackground";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import axios from "axios";
+import Dropzone from "react-dropzone";
+
+// TODO: tasarım belki revise edilebilir pek güzel değil
 
 export default function Upload() {
+  const [image, setImage] = useState();
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-
+    if (!formData.has("image")) {
+      formData.append("image", image, image.name);
+    }
     axios
       .post("/api/v1/image/upload", formData)
       .then((result) => {
@@ -26,11 +33,59 @@ export default function Upload() {
       <Header title="Yeni Yükleme" />
       <DivBackground backgroundColor="#444">
         <form style={{ margin: "20px" }} onSubmit={handleSubmit}>
-          <Input type="file" id="image" />
-          <br />
-          <Input type="text" id="description" />
-          <button className="button" style={{ width: "100%" }}>
-            YENİ YÜKLE
+          <Dropzone
+            maxFiles={1}
+            multiple={false}
+            canCancel={false}
+            accept=".jpeg,.jpg,.png"
+            onDrop={(acceptedFiles) => {
+              if (acceptedFiles.length === 0) return;
+
+              let img = acceptedFiles[0];
+              setImage(
+                Object.assign(img, { preview: URL.createObjectURL(img) })
+              );
+              console.log(acceptedFiles);
+            }}
+          >
+            {({ getRootProps, getInputProps, isDragActive }) => (
+              <div {...getRootProps()} className="div-upload clickable">
+                <input {...getInputProps()} id="image" name="image" />
+                {image ? (
+                  <img
+                    src={image.preview}
+                    style={{
+                      maxWidth: "60%",
+                      objectFit: "contain",
+                    }}
+                  />
+                ) : (
+                  <p style={{ alignSelf: "center" }}>
+                    {!isDragActive &&
+                      "Bu alana fotoğraf sürükle ya da tıklayarak seç"}
+                    {isDragActive && "Fotoğraf bırakılabilir..."}
+                  </p>
+                )}
+              </div>
+            )}
+          </Dropzone>
+          <Input
+            type="text"
+            id="description"
+            style={{
+              border: "0px",
+              borderRadius: "0px",
+              width: "100%",
+              backgroundColor: "#DFDFDF",
+              textAlign: "center",
+            }}
+            placeholder="Açıklama"
+          />
+          <button
+            className="button"
+            style={{ width: "100%", borderRadius: "0px" }}
+          >
+            YÜKLE
           </button>
         </form>
       </DivBackground>

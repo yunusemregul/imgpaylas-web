@@ -5,6 +5,8 @@ import Header from "../components/Header";
 import ImageBox from "../components/ImageBox";
 import ResponsiveMasonry from "../components/ResponsiveMasonry";
 
+// TODO: tasarım iyileştirilmeli çirkin duruyor
+
 export default function Profile() {
   const [images, setImages] = useState([]);
   const [likes, setLikes] = useState([]);
