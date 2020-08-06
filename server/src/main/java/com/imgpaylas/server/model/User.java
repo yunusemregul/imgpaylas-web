@@ -2,9 +2,11 @@ package com.imgpaylas.server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class User
 
 	@NotNull
 	@Column(unique = true)
+	@Size(min = 6, max = 64)
 	private String name;
 
 	@Column(unique = true)

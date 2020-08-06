@@ -68,7 +68,6 @@ public class LikeController
 		return likeRepository.save(newLike);
 	}
 
-
 	@DeleteMapping(path = "/image/{image_id}")
 	public @ResponseBody
 	void removeLike(@PathVariable Long image_id)

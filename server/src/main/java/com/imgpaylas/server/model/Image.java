@@ -14,8 +14,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: created_at gibi bir field
-
 @Entity
 @Table(name = "images")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // TODO: understand what this is
@@ -43,6 +41,7 @@ public class Image
 	private List<Like> likes = new ArrayList<Like>();
 
 	@NotNull
+	@Column(length = 3)
 	private String extension;
 
 	@NotNull

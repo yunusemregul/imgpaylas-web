@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface IImageRepository extends CrudRepository<Image, Integer>
 {
+	List<Image> findByOrderByCreatedAtDesc();
+
 	Image findById(Long id);
 
 	List<Image> findAllByUser(User user);
+
+	List<Image> findAllByUserOrderByCreatedAtDesc(User user);
 
 	boolean existsById(Long id);
 }

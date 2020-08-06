@@ -3,8 +3,10 @@ package com.imgpaylas.server.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Table(name = "likes")
@@ -20,6 +22,10 @@ public class Like
 	@JoinColumn(name = "image_id")
 	@Id
 	private Image image;
+
+	@CreationTimestamp
+	@Column(name = "created_at")
+	private Instant createdAt;
 
 	@JsonProperty("uid")
 	@JsonInclude
@@ -55,5 +61,15 @@ public class Like
 	public void setImage(Image image)
 	{
 		this.image = image;
+	}
+
+	public Instant getCreatedAt()
+	{
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt)
+	{
+		this.createdAt = createdAt;
 	}
 }

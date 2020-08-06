@@ -20,8 +20,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+// TODO: sayfalandırma sistemi, tüm fotoğrafları tek seferde vermek yerine kullanıcı aşağı indikçe devamını vermek
 
 @Controller
 @RequestMapping("api/v1/image")
@@ -50,14 +53,14 @@ public class ImageController
 	@ResponseBody
 	public List<Image> userAllImages(@PathVariable Long user_id)
 	{
-		return imageRepository.findAllByUser(userRepository.findById(user_id));
+		return imageRepository.findAllByUserOrderByCreatedAtDesc(userRepository.findById(user_id));
 	}
 
 	@GetMapping(path = "/all")
 	@ResponseBody
-	public Iterable<Image> getAllImages()
+	public List<Image> getAllImages()
 	{
-		return imageRepository.findAll();
+		return imageRepository.findByOrderByCreatedAtDesc();
 	}
 
 	// şuanki kullanıcının beğendiği fotoğrafları döndürüyor
@@ -70,7 +73,14 @@ public class ImageController
 
 		List<Like> likes = userRepository.findByEmail(email).getLikes();
 
-		return likes.stream().map(Like::getImage).collect(Collectors.toList());
+		return likes.stream().sorted(new Comparator<Like>() // bad practice?
+		{
+			@Override
+			public int compare(Like o1, Like o2)
+			{
+				return o2.getCreatedAt().compareTo(o1.getCreatedAt());
+			}
+		}).map(Like::getImage).collect(Collectors.toList());
 	}
 
 	// şuanki kullanıcının yüklediği fotoğrafları döndürüyor
@@ -81,7 +91,7 @@ public class ImageController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 
-		return imageRepository.findAllByUser(userRepository.findByEmail(email));
+		return imageRepository.findAllByUserOrderByCreatedAtDesc(userRepository.findByEmail(email));
 	}
 
 	@PostMapping(path = "/upload")
