@@ -6,10 +6,25 @@ body,
   background-color: #444444;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 * {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #444444;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+}
 .box {
   display: flex;
   flex-flow: column;
