@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import icon_likes from "../assets/images/icon_likes.png";
 import icon_likes_focused from "../assets/images/icon_likes_focused.png";
 import icon_profile from "../assets/images/icon_profile.png";
+import { withRouter } from "react-router-dom";
 
-export default function ImageBox(props) {
+function ImageBox(props) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [userLiked, setUserLiked] = useState(props.userLiked); // bad practice?
   const [data, setData] = useState(props.data); // bad practice?
@@ -18,7 +19,10 @@ export default function ImageBox(props) {
   }
 
   return (
-    <div className="imagebox">
+    <div
+      className="imagebox"
+      onClick={() => props.history.push("/image/" + data.id)}
+    >
       <div
         className="imagebox-imgbox"
         style={
@@ -81,3 +85,5 @@ export default function ImageBox(props) {
     </div>
   );
 }
+
+export default withRouter(ImageBox);

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("images")
+@RequestMapping("storage/images")
 public class ImageServeController
 {
 	@Autowired
@@ -22,9 +22,9 @@ public class ImageServeController
 	@Autowired
 	private IImageRepository imageRepository;
 
-	@GetMapping(value = "/{user_id}/{image_id}")
+	@GetMapping(value = "/{image_id}")
 	@ResponseBody
-	public ResponseEntity<Resource> serveImage(@PathVariable Long user_id, @PathVariable Long image_id)
+	public ResponseEntity<Resource> serveImage(@PathVariable Long image_id)
 	{
 		if (!imageRepository.existsById(image_id))
 			return ResponseEntity.notFound().build();

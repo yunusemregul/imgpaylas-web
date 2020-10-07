@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Upload from "./pages/Upload";
+import Image from "./pages/Image";
 
 // TODO: giriş yapıldıysa /, /index.html bunlar /home ye yönlendirmeli
 // TODO: home, likes sayfaları arası geçişlerde sayfalar reload yiyor düzeltilmeli
@@ -23,6 +24,7 @@ function App() {
       <Route path="/likes" component={Likes} />
       <Route path="/profile" component={Profile} />
       <Route path="/upload" component={Upload} />
+      <Route path="/image/:id" component={Image}/>
     </BrowserRouter>
   );
 }

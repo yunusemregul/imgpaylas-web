@@ -85,7 +85,7 @@ public class Image
 	@JsonInclude
 	public String getURL()
 	{
-		return String.format("/images/%d/%d", user.getId(), id);
+		return String.format("/storage/images/%d", id);
 	}
 
 	@JsonProperty("uid")
